@@ -1,0 +1,112 @@
+app-id: info.exult.exult
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: exult
+
+add-extensions:
+  org.freedesktop.Platform.GL:
+    directory: lib/GL
+    version: '22.08'
+
+modules:
+  - shared-modules/linux-audio/fluidsynth2.json
+
+  - name: vorbis
+    sources:
+      - type: git
+        url: https://github.com/xiph/vorbis.git
+        tag: v1.3.7
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+    buildsystem: autotools
+
+  # Build mt32emu for MT-32 MIDI emulation
+  - name: mt32emu
+    buildsystem: cmake-ninja
+    config-opts:
+      - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
+      - -Dmunt_WITH_MT32EMU_QT=FALSE
+      - -Dlibmt32emu_WITH_VERSION_TAGGING=TRUE
+      - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/munt/munt/archive/libmt32emu_2_7_0.tar.gz
+        sha256: 5ede7c3d28a3bb0d9e637935b8b96484fadb409c9e5952a9e5432b3e05e5dbc1
+        x-checker-data:
+          type: anitya
+          project-id: 220368
+          url-template: https://github.com/munt/munt/archive/libmt32emu_$version.tar.gz
+
+  - name: exult
+    sources:
+      - type: git
+        url: https://github.com/exult/exult.git
+        tag: v1.8.x
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+    buildsystem: autotools
+    config-opts:
+      - --enable-mt32emu
+
+  - name: exult-audiopack
+    sources:
+     - type: archive
+       url: https://downloads.sourceforge.net/project/exult/exult-data/exult_audio.zip
+       sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
+    buildsystem: simple
+    build-commands:
+      - install -d /app/share/exult/music
+      - install -m644 *.ogg /app/share/exult/music/
+      - install -m644 *.flx /app/share/exult/
+
+  - name: freepats
+    buildsystem: simple
+    build-commands:
+      - install -d /app/share/freepats/{Drum,Tone}_000
+      - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
+      - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
+      - install -m644 crude.cfg /app/share/freepats/freepats.cfg
+      - install -d /app/share/timidity
+      - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
+    sources:
+      - type: file
+        path: timidity.cfg
+      - type: archive
+        url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
+        sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
+
+  - name: supportfiles
+    sources:
+      - type: file
+        path: info.exult.exult.desktop
+      - type: file
+        path: info.exult.exult.appdata.xml
+      - type: file
+        path: info.exult.exult.png
+    buildsystem: simple
+    build-commands:
+      - install -d /app/share/icons/hicolor/128x128/apps/
+      - install -D -m644 info.exult.exult.png /app/share/icons/hicolor/128x128/apps/
+      - install -D -m644 info.exult.exult.desktop /app/share/applications/info.exult.exult.desktop
+      - install -D -m644 info.exult.exult.appdata.xml /app/share/metainfo/info.exult.exult.appdata.xml
+      - for game in silverseed serpentisle serpentbeta forgeofvirtue blackgate; do ln -s ~/.exult/$game /app/share/exult/$game; done
+
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  - --socket=fallback-x11
+  # Wayland access
+  - --socket=wayland
+  # Audio
+  - --socket=pulseaudio
+  # Home directory access for game data
+  - --filesystem=~/.exult/
+  - --filesystem=~/.exult.cfg
+  # Tell SDL_mixer where to find Timidity config
+  - --env=TIMIDITY_CFG=/app/share/timidity/timidity.cfg
