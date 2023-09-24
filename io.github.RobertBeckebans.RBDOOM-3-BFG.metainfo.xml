@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.RobertBeckebans.RBDOOM-3-BFG</id>
+  <launchable type="desktop-id">io.github.RobertBeckebans.RBDOOM-3-BFG.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <translation type="gettext">rbdoom3bfg_Main</translation>
+  <name>RBDoom3BFG</name>
+  <developer_name>Robert Beckebans</developer_name>
+  <summary>Doom 3 BFG Edition with modern engine features (2021) like PBR, Baked Global Illumination, Soft Shadows, Cleaned up source, Linux and 64 bit Support</summary>
+  <description>
+    <p>RBDOOM-3-BFG is a modernization effort of DOOM-3-BFG.</p>
+    <p>RBDOOM-3-BFG is based on DOOM-3-BFG and the goal of this port is to bring DOOM-3-BFG up to latest technology in 2021 making it closer to Doom 2016
+        while still remaining a DOOM 3 port regarding the gameplay.</p>
+    <p>Copy your DOOM 3 BFG Edition `base` directory to the default search path "$HOME/.var/app/io.github.RobertBeckebans.RBDOOM-3-BFG/data/rbdoom3bfg/".</p>
+  </description>
+  <url type="homepage">https://github.com/RobertBeckebans/RBDOOM-3-BFG</url>
+  <url type="bugtracker">https://github.com/RobertBeckebans/RBDOOM-3-BFG/issues</url>
+  <releases>
+    <release version="1.4.0" date="2022-03-06"/>
+  </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://camo.githubusercontent.com/0130a9cb36257cd10f6958683a36f52a89c3bf43ac247556d8873cd01aa2df14/68747470733a2f2f692e696d6775722e636f6d2f6e5357425355422e706e67</image>
+      <caption>Screenshot</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+  <update_contact>florian@yellowkeycard.net</update_contact>
+</component>

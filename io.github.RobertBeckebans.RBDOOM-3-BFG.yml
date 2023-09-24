@@ -1,0 +1,79 @@
+app-id: io.github.RobertBeckebans.RBDOOM-3-BFG
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: RBDoom3BFG
+
+modules:
+  - shared-modules/glu/glu-9.json
+  - name: rbdoom3bfg
+    buildsystem: simple
+    build-commands:
+      - cd neo && ./cmake-linux-release.sh && cd ../build && make
+    sources:
+      - type: git
+        url: https://github.com/RobertBeckebans/RBDOOM-3-BFG.git
+        tag: v1.4.0
+        x-checker-data:
+          type: git
+          tag-pattern: "^v([\\d.]+)$"
+
+      - type: file
+        path: io.github.RobertBeckebans.RBDOOM-3-BFG.appdata.xml
+
+      - type: file
+        path: io.github.RobertBeckebans.RBDOOM-3-BFG.desktop
+
+      - type: file
+        path: io.github.RobertBeckebans.RBDOOM-3-BFG.png
+
+      - type: archive
+        md5: 167ef6d721c11b3a38fdccfb79062b3b
+        dest-filename: rbdoom3bfg-mod-1.3.0.7z
+        archive-type: 7z
+        size: 6639732127
+        installed-size: "6.5 GB"
+        url: https://www.moddb.com/downloads/start/222754?referer=https%3A%2F%2Fwww.moddb.com%2Fmods%2Frbdoom-3-bfg%2Fdownloads
+        x-checker-data:
+          type: git
+          tag-pattern: "^v([\\d.]+)$"
+
+      - type: archive
+        md5: 97eb057528bbd64c7854aea6614614dc
+        dest-filename: rbdoom3bfg-mod-patch-1.4.0.7z
+        archive-type: 7z
+        size: 104376806
+        installed-size: "99.5 MB"
+        url: https://www.moddb.com/downloads/start/229087?referer=https%3A%2F%2Fwww.moddb.com%2Fmods%2Frbdoom-3-bfg%2Fdownloads
+
+    post-install:
+      # Install metadata and desktop file
+      - install -pDm644 ../io.github.RobertBeckebans.RBDOOM-3-BFG.desktop /app/share/applications/io.github.RobertBeckebans.RBDOOM-3-BFG.desktop
+      - install -pDm644 ../io.github.RobertBeckebans.RBDOOM-3-BFG.metainfo.xml /app/share/metainfo/io.github.RobertBeckebans.RBDOOM-3-BFG.metainfo.xml
+      - install -pDm644 ../io.github.RobertBeckebans.RBDOOM-3-BFG.png /app/share/icons/hicolor/apps/io.github.RobertBeckebans.RBDOOM-3-BFG.png
+
+      # Install 
+      - install -pm755 build/RBDoom3BFG /app/bin
+      - install -pDm644 base/* /usr/share/games/doom3/base/
+
+      # Install RBDoom3BFG mod data
+      - install -pDm644 rbdoom3bfg-mod-1.3.0/base rbdoom3bfg-mod-1.3.0/@UltimateHD -t /usr/share/games/doom3/
+      - install -pDm644 rbdoom3bfg-mod-patch-1.4.0/base rbdoom3bfg-mod-patch-1.4.0/@UltimateHD -t /usr/share/games/doom3/
+
+    cleanup:
+      - build
+
+finish-args:
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Wayland access
+  - --socket=wayland
+  # Needs to talk to the network:
+  - --share=network
+  # Needs access to user's home directory
+  - --filesystem=home:ro
