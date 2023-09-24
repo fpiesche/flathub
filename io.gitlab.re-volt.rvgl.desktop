@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=RVGL Launcher
+Exec=rvgl-launcher.sh
+Type=Application
+Terminal=false
+Categories=Game;
+Icon=io.gitlab.re-volt

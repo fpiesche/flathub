@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <id type="desktop">io.gitlab.re-volt</id>
+  <name>RVGL Launcher</name>
+  <developer_name>RVGL Team</developer_name>
+  <summary>A cross-platform installer, launcher and package manager for RVGL.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license> GPL-3.0-only</project_license>
+  <url type="homepage">https://gitlab.com/re-volt/rvgl-launcher</url>
+  <icon type="remote" height="256" width="256">https://gitlab.com/re-volt/rvgl-launcher/-/raw/master/icons/icon.png</icon>
+  <description>
+    <p>RVGL Launcher is a cross-platform installer, launcher and package manager for RVGL. This is a planned successor to the linux-only RVGL Installer script.</p>
+    <p>Features</p>
+    <ul>
+        <li>Install and update game and content packs.</li>
+        <li>View list of online events and join them directly.</li>
+        <li>Enable or disable content packs on the fly.</li>
+        <li>Add your own content repositories.</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://re-volt.gitlab.io/rvgl-launcher/screens/install.png</image>
+      <caption>Install RVGL easily using preset configurations</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://re-volt.gitlab.io/rvgl-launcher/screens/launch.png</image>
+      <caption>Launch your installed copy of RVGL, with a preset or custom setup</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://re-volt.gitlab.io/rvgl-launcher/screens/events.png</image>
+      <caption>View community events</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://re-volt.gitlab.io/rvgl-launcher/screens/packs.png</image>
+      <caption>Manage content packs in detail</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://re-volt.gitlab.io/rvgl-launcher/screens/repos.png</image>
+      <caption>Manage custom repositories of community content</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
+  <releases>
+    <release version="0.1.21.630a1" date="2021-06-30"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <update_contact></update_contact>
+</application>

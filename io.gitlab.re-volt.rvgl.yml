@@ -1,0 +1,118 @@
+app-id: io.gitlab.re-volt
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: /app/rvgl-launcher.sh
+
+add-extensions:
+  org.freedesktop.Platform.GL:
+    directory: lib/GL
+    version: '22.08'
+
+modules:
+  - shared-modules/glu/glu-9.json
+  - shared-modules/glew/glew.json
+
+  - name: wxWidgets
+    cleanup:
+      - /bin
+      - /include
+    config-opts:
+      - --with-opengl
+      - --disable-glcanvasegl
+    sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.2.1/wxWidgets-3.2.2.1.tar.bz2
+        sha256: dffcb6be71296fff4b7f8840eb1b510178f57aa2eb236b20da41182009242c02
+        x-checker-data:
+          type: html
+          url: https://wxwidgets.org/downloads
+          version-pattern: 'Latest Stable Release: ([\d\.]+)'
+          url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
+      - type: script
+        commands:
+          - cp -p /usr/share/automake-*/config.{sub,guess} .
+          - autoconf -f -B build/autoconf_prepend-include
+
+  - name: p7zip
+    no-autogen: true
+    make-args:
+      - DEST_HOME=/app
+      - 7z
+    make-install-args:
+      - DEST_HOME=/app
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://api.github.com/repos/p7zip-project/p7zip/tarball/v17.05
+        sha256: 8be694161a71b94d50bd0632d85266f32729e45b60f128a6891a0eeb8d354fe3
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/p7zip-project/p7zip/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
+          timestamp-query: .published_at
+    cleanup:
+      - /man
+      - /share
+
+  - name: python3-attrdict3
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} attrdict3 --no-build-isolation
+    cleanup:
+      - /lib
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/9b/a9/c3f5f498295317c8be62bbe5d1adc1a2864db1720b2a0b4a39e0448d51e4/attrdict3-2.0.2.tar.gz
+        sha256: 004c171ca1120cc1755701db99d7fa4944afb1e68950434efdaa542513335fe8
+        x-checker-data:
+          type: pypi
+          name: attrdict3
+
+  - python3-wxPython.yml
+  - python3-requests.yml
+  - python3-packaging.yml
+
+  - name: rvgl
+    sources:
+      - type: git
+        url: https://gitlab.com/re-volt/rvgl-launcher.git
+        tag: 0.1.21.630a1
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\\d.]+)$
+    buildsystem: simple
+    build-commands:
+      - cp -r ./* /app/
+      - install -D /app/icons/icon.png /app/share/icons/hicolor/256x256/apps/io.gitlab.re-volt.png
+
+  - name: supportfiles
+    sources:
+      - type: file
+        path: rvgl-launcher.sh
+      - type: file
+        path: io.gitlab.re-volt.desktop
+      - type: file
+        path: io.gitlab.re-volt.appdata.xml
+    buildsystem: simple
+    build-commands:
+      - install -D rvgl-launcher.sh /app/rvgl-launcher.sh
+      - install -D io.gitlab.re-volt.desktop /app/share/applications/io.gitlab.re-volt.desktop
+      - install -D io.gitlab.re-volt.appdata.xml /app/share/metainfo/io.gitlab.re-volt.appdata.xml
+
+finish-args:
+  # hardware 3D
+  - --device=all
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  - --socket=fallback-x11
+  # Audio
+  - --socket=pulseaudio
+  # Wayland access
+  - --socket=wayland
+  # Needs to talk to the network:
+  - --share=network
