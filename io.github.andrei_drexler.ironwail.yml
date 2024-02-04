@@ -12,6 +12,7 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
+  - --filesystem=~/.steam/steam/steamapps/
 
 cleanup:
   - /include
@@ -46,12 +47,28 @@ modules:
       - type: script
         dest-filename: ironwail.sh
         commands:
-          # Verify game data is present
-          - ls $XDG_DATA_HOME/id1/pak0.pak || zenity --error --text "Please ensure $XDG_DATA_HOME/id1/ exists
-            and contains at least Quake's pak0.pak game data file."
-            --ok-label "Close" --width=400
-          # launch the game
-          - /app/bin/ironwail -basedir $XDG_DATA_HOME "$@"
+          - #!/bin/bash
+          - # Check for game data
+          - if [[ ! -d $HOME/.steam/steam/steamapps/common/Quake/id1/ ]]; then
+          -     if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
+          -         zenity --error --text "<b>Could not find Quake game data</b>\n\n
+                        Please either install Quake via Steam to your library in <tt><b>$HOME/.steam/steam/</b></tt>
+                        or copy the game data (at least <tt>pak0.pak</tt>) to <tt><b>$XDG_DATA_HOME/id1/pak0.pak</b></tt>."
+                        --ok-label "Quit" --width=400
+          -     else
+          - # If game data is already in XDG_DATA_HOME, just start the game
+          -         /app/bin/ironwail -basedir $XDG_DATA_HOME "$@"
+          -     fi
+          - # If game data is in Steam directory, run Ironwail without -basedir but catch potential errors on exit
+          - else
+          -     /app/bin/ironwail "$@"
+          -     if [[ "$?" != "0" ]]; then
+          -         zenity --error --text "<b>Ironwail exited with an error</b>\n\n
+                    For a detailed error message, please run Ironwail from a terminal window using\n
+                    <tt><b>flatpak run $FLATPAK_ID</b></tt>."
+                    --ok-label "Quit" --width=400
+          -     fi
+          - fi
     buildsystem: simple
     build-commands:
       # Build
@@ -59,10 +76,9 @@ modules:
       # Install main data and executable
       - install -D -m744 -t /app/bin/ Quake/ironwail
       - install -D -m755 -t /app/bin/ Quake/ironwail.pak
-
       # Install metadata and launcher files
       - install -D -m744 -t /app/bin/ ironwail.sh
-#      - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/net.sourceforge.quakespasm.Quakespasm.png
-#      - install -D -m755 -t /app/share/metainfo/ Linux/net.sourceforge.quakespasm.Quakespasm.appdata.xml
-#      - desktop-file-edit --set-key=Exec --set-value=quakespasm.sh Linux/net.sourceforge.quakespasm.Quakespasm.desktop
-#      - install -D -m755 -t /app/share/applications/ Linux/net.sourceforge.quakespasm.Quakespasm.desktop
+      - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/io.github.andrei_drexler.ironwail.png
+#      - install -D -m755 -t /app/share/metainfo/ Linux/io.github.andrei_drexler.ironwail.appdata.xml
+#      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/io.github.andrei_drexler.ironwail.desktop
+#      - install -D -m755 -t /app/share/applications/ Linux/io.github.andrei_drexler.ironwail.desktop
