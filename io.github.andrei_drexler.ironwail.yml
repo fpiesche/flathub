@@ -12,6 +12,7 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
+  # default Steam library for auto-detecting game data
   - --filesystem=~/.local/share/Steam/steamapps/
 
 cleanup:
@@ -47,7 +48,6 @@ modules:
       - type: script
         dest-filename: ironwail.sh
         commands:
-          - #!/bin/bash
           - # Check for game data
           - if [[ ! -d $HOME/.local/share/Steam/steamapps/common/Quake/id1/ ]]; then
           -     if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
@@ -76,9 +76,9 @@ modules:
       # Install main data and executable
       - install -D -m744 -t /app/bin/ Quake/ironwail
       - install -D -m755 -t /app/bin/ Quake/ironwail.pak
-      # Install metadata and launcher files
       - install -D -m744 -t /app/bin/ ironwail.sh
+      # Install metadata and launcher files
       - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/io.github.andrei_drexler.ironwail.png
-#      - install -D -m755 -t /app/share/metainfo/ Linux/io.github.andrei_drexler.ironwail.appdata.xml
-#      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/io.github.andrei_drexler.ironwail.desktop
-#      - install -D -m755 -t /app/share/applications/ Linux/io.github.andrei_drexler.ironwail.desktop
+      - install -D -m755 -t /app/share/metainfo/ Linux/io.github.andrei_drexler.ironwail.appdata.xml
+      - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/io.github.andrei_drexler.ironwail.desktop
+      - install -D -m755 -t /app/share/applications/ Linux/io.github.andrei_drexler.ironwail.desktop
