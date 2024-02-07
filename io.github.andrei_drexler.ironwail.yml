@@ -12,7 +12,7 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
-  - --filesystem=~/.steam/steam/steamapps/
+  - --filesystem=~/.local/share/Steam/steamapps/
 
 cleanup:
   - /include
@@ -49,10 +49,10 @@ modules:
         commands:
           - #!/bin/bash
           - # Check for game data
-          - if [[ ! -d $HOME/.steam/steam/steamapps/common/Quake/id1/ ]]; then
+          - if [[ ! -d $HOME/.local/share/Steam/steamapps/common/Quake/id1/ ]]; then
           -     if [[ ! -f $XDG_DATA_HOME/id1/pak0.pak ]]; then
           -         zenity --error --text "<b>Could not find Quake game data</b>\n\n
-                        Please either install Quake via Steam to your library in <tt><b>$HOME/.steam/steam/</b></tt>
+                        Please either install Quake via Steam to your library in <tt><b>$HOME/.local/share/Steam/</b></tt>
                         or copy the game data (at least <tt>pak0.pak</tt>) to <tt><b>$XDG_DATA_HOME/id1/pak0.pak</b></tt>."
                         --ok-label "Quit" --width=400
           -     else
