@@ -79,6 +79,6 @@ modules:
       - install -D -m744 -t /app/bin/ ironwail.sh
       # Install metadata and launcher files
       - install -D -m755 Misc/QuakeSpasm_512.png /app/share/icons/hicolor/512x512/apps/io.github.andrei_drexler.ironwail.png
-      - install -D -m755 -t /app/share/metainfo/ Linux/io.github.andrei_drexler.ironwail.appdata.xml
+      - install -D -m755 -t /app/share/metainfo/ Linux/io.github.andrei_drexler.ironwail.metainfo.xml
       - desktop-file-edit --set-key=Exec --set-value=ironwail.sh Linux/io.github.andrei_drexler.ironwail.desktop
       - install -D -m755 -t /app/share/applications/ Linux/io.github.andrei_drexler.ironwail.desktop
