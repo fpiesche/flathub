@@ -27,15 +27,14 @@ cleanup:
   - /share/pixmaps
 
 modules:
-  - shared-modules/glu/glu-9.json
-  - shared-modules/SDL2/SDL2-with-libdecor.json
-  - modules/org.boost.Boost.yml
-  - modules/org.freetype.libfreetype.yml
-  - modules/io.github.anholt.libepoxy.yml
-  - modules/net.g_truc.glm.yml
-  - modules/org.openal_soft.openal-soft.yml
-
   - name: arx
+    modules:
+      - shared-modules/glu/glu-9.json
+      - modules/org.boost.Boost.yml
+      - modules/org.freetype.libfreetype.yml
+      - modules/io.github.anholt.libepoxy.yml
+      - modules/net.g_truc.glm.yml
+      - modules/org.openal_soft.openal-soft.yml
     buildsystem: cmake
     build-options:
       cxxflags: -O2 -g -pthread -lGL
@@ -62,5 +61,6 @@ modules:
     post-install:
       # Install metadata and launcher files
       - desktop-file-edit --set-icon=org.arx_libertatis.ArxLibertatis data/icons/arx-libertatis.desktop
-      - install -D -m755 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/org.arx_libertatis.ArxLibertatis.png
-      - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/org.arx_libertatis.ArxLibertatis.desktop
+      - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/org.arx_libertatis.arxlibertatis.desktop
+      - install -D -m644 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/org.arx_libertatis.arxlibertatis.png
+      # - install -D -m644 ./
