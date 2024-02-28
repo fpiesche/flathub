@@ -1,4 +1,4 @@
-app-id: org.arx_libertatis.ArxLibertatis
+app-id: org.arx_libertatis.arxlibertatis
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
@@ -51,8 +51,6 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^([\d\.]+)$
-      - type: patch
-        path: desktop-file-icon.patch
       - type: git
         url: https://github.com/arx/ArxLibertatisData.git
         tag: "1"
@@ -63,5 +61,6 @@ modules:
           tag-pattern: ^([\d\.]+)$
     post-install:
       # Install metadata and launcher files
+      - desktop-file-edit --set-icon=org.arx_libertatis.ArxLibertatis data/icons/arx-libertatis.desktop
       - install -D -m755 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/org.arx_libertatis.ArxLibertatis.png
       - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/org.arx_libertatis.ArxLibertatis.desktop
