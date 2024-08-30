@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <id type="desktop">info.exult.exult</id>
+<component>
+  <id>info.exult.exult</id>
   <name>Exult Ultima 7 Engine</name>
   <developer id="info.exult.exult">
     <name>Exult Contributors</name>
     <url>https://github.com/exult/exult/graphs/contributors</url>
   </developer>
-  <summary>A cross-platform engine for the Ultima 7 games.</summary>
+  <summary>A cross-platform engine for the Ultima 7 games</summary>
   <metadata_license>CC0-1.0</metadata_license>
+  <launchable type="desktop-id">info.exult.exult</launchable>
   <project_license> GPL-2.0-only</project_license>
   <url type="homepage">https://exult.info/</url>
   <description>
@@ -18,19 +19,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">http://exult.info/images/screenshots/mainmenu.png</image>
+      <image type="source">https://exult.info/images/screenshots/mainmenu.png</image>
       <caption>Select the game to play</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://exult.info/images/screenshots/si.png</image>
+      <image type="source">https://exult.info/images/screenshots/si.png</image>
       <caption>Supports all of the Ultima 7 games, including The Serpent Isle</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://exult.info/images/screenshots/gamemenu.png</image>
+      <image type="source">https://exult.info/images/screenshots/gamemenu.png</image>
       <caption>Includes various high-quality scaling algorithms for the original low-resolution artwork</caption>
     </screenshot>
     <screenshot>
-      <image type="source">http://exult.info/images/screenshots/gameplaymenu.png</image>
+      <image type="source">https://exult.info/images/screenshots/gameplaymenu.png</image>
       <caption>A wide range of customization options</caption>
     </screenshot>
   </screenshots>
@@ -55,4 +56,4 @@
     <content_attribute id="money-gambling">moderate</content_attribute>
   </content_rating>
   <update_contact>https://github.com/exult/exult/issues</update_contact>
-</application>
+</component>

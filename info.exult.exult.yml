@@ -3,15 +3,26 @@ runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: exult
+rename-desktop-file: exult.desktop
+rename-icon: exult
 
 add-extensions:
   org.freedesktop.Platform.GL:
     directory: lib/GL
     version: '23.08'
 
+finish-args:
+  # hardware 3D
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  - --env=TIMIDITY_CFG=/app/share/timidity/timidity.cfg
+
 modules:
   - shared-modules/linux-audio/fluidsynth2.json
-
   - name: vorbis
     sources:
       - type: git
@@ -51,61 +62,42 @@ modules:
     config-opts:
       - --enable-mt32emu
 
-  - name: exult-audiopack
+  - name: extra-data
     sources:
-     - type: archive
-       url: https://downloads.sourceforge.net/project/exult/exult-data/exult_audio.zip
-       sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
-    buildsystem: simple
-    build-commands:
-      - install -d /app/share/exult/music
-      - install -m644 *.ogg /app/share/exult/music/
-      - install -m644 *.flx /app/share/exult/
-
-  - name: freepats
-    buildsystem: simple
-    build-commands:
-      - install -d /app/share/freepats/{Drum,Tone}_000
-      - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
-      - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
-      - install -m644 crude.cfg /app/share/freepats/freepats.cfg
-      - install -d /app/share/timidity
-      - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
-    sources:
-      - type: file
-        path: timidity.cfg
-      - type: archive
+      - type: extra-data
+        url: https://downloads.sourceforge.net/project/exult/exult-data/exult_audio.zip
+        sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
+        filename: exult_audio.zip
+        size: 48439905
+      - type: extra-data
         url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
         sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
-
-  - name: supportfiles
-    sources:
-      - type: file
-        path: info.exult.exult.desktop
+        size: 25093512
+        filename: freepats.tar.xz
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - unzip exult_audio.zip
+          - mkdir -p /app/share/exult/music
+          - install -m644 *.ogg /app/share/exult/music/
+          - install -m644 *.flx /app/share/exult/
+          - tar xf freepats.tar.xz
+          - install -d /app/share/freepats/{Drum,Tone}_000
+          - install -m644 Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
+          - install -m644 Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
+          - install -m644 crude.cfg /app/share/freepats/freepats.cfg
       - type: file
         path: info.exult.exult.metainfo.xml
+      - type: file
+        path: timidity.cfg
       - type: file
         path: info.exult.exult.png
     buildsystem: simple
     build-commands:
-      - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -d /app/share/timidity
+      - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
-      - for game in silverseed serpentisle serpentbeta forgeofvirtue blackgate; do ln -s ${XDG_DATA_HOME}/.exult/$game /app/share/exult/$game; done
-
-finish-args:
-  # hardware 3D
-  - --device=dri
-  # X11 + XShm access
-  - --share=ipc
-  - --socket=x11
-  - --socket=fallback-x11
-  # Wayland access
-  - --socket=wayland
-  # Audio
-  - --socket=pulseaudio
-  # Home directory access for game data
-  - --filesystem=~/.exult/
-  - --filesystem=~/.exult.cfg
-  # Tell SDL_mixer where to find Timidity config
-  - --env=TIMIDITY_CFG=/app/share/timidity/timidity.cfg
+      - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/${FLATPAK_ID}.png
+      # - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      # - for game in silverseed serpentisle serpentbeta forgeofvirtue blackgate; do ln -s ${XDG_DATA_HOME}/.exult/$game /app/share/exult/$game; done
