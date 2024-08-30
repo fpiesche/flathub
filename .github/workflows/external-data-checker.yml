@@ -20,7 +20,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        branch: ${{ matrix.branch }}
+        ref: ${{ matrix.branch }}
+
+    - run: |
+        ls -la
+        ls -la ./flathub
 
     - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
       env:
