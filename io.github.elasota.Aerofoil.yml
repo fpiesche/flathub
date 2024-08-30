@@ -38,6 +38,8 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^([\d\.]+)$
+        commit: 1fe94e4f06cec8f68b9298a82c15dab6113d1c61
+        tag: 1.1.2
       - type: patch
         path: fix-sdl-build.patch
       - type: archive
