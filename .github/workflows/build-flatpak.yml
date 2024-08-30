@@ -1,0 +1,32 @@
+name: Build Flatpak
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-flatpak-bundle:
+    name: "Build flatpak bundle"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ github.head_ref || github.ref_name }}.flatpak
+        manifest-path: ${{ github.head_ref || github.ref_name }}.yml
+        cache-key: flatpak-builder-${{ github.sha }}
+        upload-artifact: true
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.head_ref || github.ref_name }}.flatpak
+        path: ${{ github.head_ref || github.ref_name }}.flatpak
+        retention-days: 0
+Footer
