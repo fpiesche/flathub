@@ -7,10 +7,21 @@ on:
 
 jobs:
   flathub-data-checker-global:
+    strategy:
+      matrix:
+        branch:
+          - org.arx-libertatis.arx-libertatis
+          - io.github.fpiesche.f2bgl
+          - io.github.elasota.Aerofoil
+          - io.github.Interkarma.daggerfall-unity
+          - io.github.andrei-drexler.ironwail
+          - io.gitlab.re-volt.rvgl
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        branch: ${{ matrix.branch }}
 
     - uses: ./.github/actions/flatpak-external-data-checker
       env:
-        GITHUB_TOKEN: ${{ secrets.FLATHUBBOT_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
