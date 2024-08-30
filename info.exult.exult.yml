@@ -88,11 +88,11 @@ modules:
         path: info.exult.exult.png
     buildsystem: simple
     build-commands:
-      - install -d /app/share/icons/hicolor/128x128/apps/
-      - install -D -m644 info.exult.exult.png /app/share/icons/hicolor/128x128/apps/
-      - install -D -m644 info.exult.exult.desktop /app/share/applications/info.exult.exult.desktop
-      - install -D -m644 info.exult.exult.appdata.xml /app/share/metainfo/info.exult.exult.appdata.xml
-      - for game in silverseed serpentisle serpentbeta forgeofvirtue blackgate; do ln -s ~/.exult/$game /app/share/exult/$game; done
+      - install -Dm 755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
+      - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
+      - for game in silverseed serpentisle serpentbeta forgeofvirtue blackgate; do ln -s ${XDG_DATA_HOME}/.exult/$game /app/share/exult/$game; done
 
 finish-args:
   # hardware 3D
