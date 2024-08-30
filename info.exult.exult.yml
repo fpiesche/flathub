@@ -4,7 +4,6 @@ runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: exult
 rename-desktop-file: exult.desktop
-rename-icon: exult
 
 add-extensions:
   org.freedesktop.Platform.GL:
