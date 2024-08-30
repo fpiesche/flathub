@@ -29,4 +29,3 @@ jobs:
         name: ${{ github.head_ref || github.ref_name }}.flatpak
         path: ${{ github.head_ref || github.ref_name }}.flatpak
         retention-days: 0
-Footer
