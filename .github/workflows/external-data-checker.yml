@@ -1,12 +1,12 @@
-name: 'Check if external data changed across Flathub org'
+name: 'Check for external updates'
 on:
   schedule:
     - cron: '0 * * * *'
-
   workflow_dispatch:
 
 jobs:
   flathub-data-checker-global:
+    name: ${{ matrix.branch }}
     strategy:
       matrix:
         branch:
@@ -22,6 +22,13 @@ jobs:
       with:
         branch: ${{ matrix.branch }}
 
-    - uses: ./.github/actions/flatpak-external-data-checker
+    - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GIT_AUTHOR_NAME: Flatpak External Data Checker
+        GIT_COMMITTER_NAME: Flatpak External Data Checker
+        # email sets "github-actions[bot]" as commit author, see https://github.community/t/github-actions-bot-email-address/17204/6
+        GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: --update --never-fork ${{ matrix.branch }}.yml # e.g. com.organization.myapp.json
