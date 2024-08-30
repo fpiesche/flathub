@@ -83,12 +83,11 @@ modules:
       - type: file
         path: info.exult.exult.desktop
       - type: file
-        path: info.exult.exult.appdata.xml
+        path: info.exult.exult.metainfo.xml
       - type: file
         path: info.exult.exult.png
     buildsystem: simple
     build-commands:
-      - install -Dm 755 ${FLATPAK_ID}.sh /app/bin/${FLATPAK_ID}.sh
       - install -Dm 644 ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -Dm 644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm 644 ${FLATPAK_ID}.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
