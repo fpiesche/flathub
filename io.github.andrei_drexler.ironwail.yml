@@ -39,9 +39,10 @@ modules:
   - name: ironwail
     sources:
       - type: git
-        url: https://github.com/andrei-drexler/ironwail
-        tag: v0.7.0
-        commit: 5b130aae74d43139e5292104a085c19fc1a24b1e
+        url: https://github.com/fpiesche/ironwail
+        # url: https://github.com/andrei-drexler/ironwail
+        # tag: v0.7.0
+        # commit: 5b130aae74d43139e5292104a085c19fc1a24b1e
         x-checker-data:
           type: git
           tag-pattern: ^v(.*)$
