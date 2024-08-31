@@ -40,7 +40,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fpiesche/ironwail
-        commit: 69ff8cbf7fe35213325e44b0f44dfcc3edc8999f
+        commit: d43dbfda58e60039c290d2be58235dc152bc436c
         # url: https://github.com/andrei-drexler/ironwail
         # tag: v0.7.0
         # commit: 5b130aae74d43139e5292104a085c19fc1a24b1e
