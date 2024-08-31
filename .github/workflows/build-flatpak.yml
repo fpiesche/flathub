@@ -42,7 +42,7 @@ jobs:
 
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: ${{ github.head_ref || github.ref_name }}_${{ steps.date.outputs.date }}_${{ matrix.arch }}.flatpak
+        bundle: ${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_${{ matrix.arch }}.flatpak
         manifest-path: ${{ github.head_ref || github.ref_name }}.yml
         cache-key: flatpak-builder-${{ github.sha }}_${{ matrix.arch }}
         upload-artifact: true
@@ -50,8 +50,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.head_ref || github.ref_name }}_${{ steps.date.outputs.date }}_${{ matrix.arch }}.flatpak
-        path: ${{ github.head_ref || github.ref_name }}_${{ steps.date.outputs.date }}_${{ matrix.arch }}.flatpak
+        name: ${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_${{ matrix.arch }}.flatpak
+        path: ${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_${{ matrix.arch }}.flatpak
         retention-days: 0
 
   release-bundle:

@@ -1,3 +1,3 @@
 #!/bin/bash
-python /app/rvgl_launcher.py
+python /app/bin/rvgl_launcher.py
 
