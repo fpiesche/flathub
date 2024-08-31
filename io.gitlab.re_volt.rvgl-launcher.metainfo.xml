@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-  <id type="desktop">io.gitlab.re_volt.rvgl</id>
+  <id type="desktop">io.gitlab.re_volt.rvgl-launcher</id>
   <name>RVGL Launcher</name>
   <developer_name>RVGL Team</developer_name>
   <summary>A cross-platform installer, launcher and package manager for RVGL.</summary>

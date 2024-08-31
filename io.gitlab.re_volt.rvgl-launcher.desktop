@@ -4,4 +4,4 @@ Exec=rvgl-launcher.sh
 Type=Application
 Terminal=false
 Categories=Game;
-Icon=io.gitlab.re_volt.rvgl
+Icon=io.gitlab.re_volt.rvgl-launcher
