@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application"/>
 <application>
-  <id type="desktop">io.github.Interkarma.daggerfall-unity</id>
+  <id type="desktop">io.github.interkarma.daggerfall-unity</id>
   <name>Daggerfall Unity</name>
   <developer_name>Daggerfall Unity contributors</developer_name>
   <summary>A modern port of The Elder Scrolls II: Daggerfall</summary>

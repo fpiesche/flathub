@@ -1,4 +1,4 @@
-app-id: io.github.Interkarma.daggerfall-unity
+app-id: io.github.interkarma.daggerfall-unity
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
@@ -25,16 +25,16 @@ modules:
       - type: file
         url: https://github.com/Interkarma/daggerfall-unity/raw/v1.0.0/Assets/Resources/DFUIcon.png
         sha256: d353d022c96792857527ac03c204fd6178d65d8cbcbd14dc6e6b975232b95125
-        dest-filename: io.github.Interkarma.daggerfall-unity.png
+        dest-filename: io.github.interkarma.daggerfall-unity.png
       - type: file
-        path: io.github.Interkarma.daggerfall-unity.appdata.xml
+        path: io.github.interkarma.daggerfall-unity.appdata.xml
       - type: file
-        path: io.github.Interkarma.daggerfall-unity.desktop
+        path: io.github.interkarma.daggerfall-unity.desktop
     buildsystem: simple
     build-commands:
       # Extract DFU release
       - unzip dfu-linux.zip -d /app/bin
       # Install metadata and launcher files
-      - install -D -m755 io.github.Interkarma.daggerfall-unity.png /app/share/icons/hicolor/256x256/apps/io.github.Interkarma.daggerfall-unity.png
-      - install -D -m755 -t /app/share/metainfo/ io.github.Interkarma.daggerfall-unity.appdata.xml
-      - install -D -m755 -t /app/share/applications/ io.github.Interkarma.daggerfall-unity.desktop
+      - install -D -m755 io.github.interkarma.daggerfall-unity.png /app/share/icons/hicolor/256x256/apps/io.github.interkarma.daggerfall-unity.png
+      - install -D -m755 -t /app/share/metainfo/ io.github.interkarma.daggerfall-unity.appdata.xml
+      - install -D -m755 -t /app/share/applications/ io.github.interkarma.daggerfall-unity.desktop
