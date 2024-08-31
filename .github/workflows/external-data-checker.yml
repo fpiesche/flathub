@@ -8,6 +8,7 @@ jobs:
   flathub-data-checker-global:
     name: ${{ matrix.branch }}
     strategy:
+      fail-fast: false
       matrix:
         branch:
           - org.arx_libertatis.arxlibertatis
