@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application"/>
 <application>
-  <id type="desktop">io.github.interkarma.daggerfall-unity</id>
+  <id>io.github.interkarma.daggerfall-unity</id>
   <name>Daggerfall Unity</name>
-  <developer_name>Daggerfall Unity contributors</developer_name>
+  <developer id="io.github.interkarma.daggerfall-unity">
+    <name>Daggerfall Unity contributors</name>
+  </developer>
   <summary>A modern port of The Elder Scrolls II: Daggerfall</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
+  <launchable type="desktop-id">io.github.interkarma.daggerfall-unity.desktop</launchable>
   <url type="homepage">http://www.dfworkshop.net/</url>
   <description>
     <p>Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.</p>
