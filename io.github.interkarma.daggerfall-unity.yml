@@ -25,8 +25,8 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Interkarma/daggerfall-unity/releases/latest
-          version-query: .tag_name
-          url-query: .assets[] | select(.name==\"dfu_linux_64bit-\" + $version + \".zip\") | .browser_download_url
+          version-query: ".tag_name"
+          url-query: ".assets[] | select(.name==\"dfu_linux_64bit-\" + $version + \".zip\") | .browser_download_url"
       - type: file
         url: https://github.com/Interkarma/daggerfall-unity/raw/v1.0.0/Assets/Resources/DFUIcon.png
         sha256: d353d022c96792857527ac03c204fd6178d65d8cbcbd14dc6e6b975232b95125
