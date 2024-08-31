@@ -2,12 +2,12 @@ name: boost
 buildsystem: simple
 build-commands:
   - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=program_options
-  - ./b2 variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS"
-    linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
+  - ./b2 variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS"
+    -j $FLATPAK_BUILDER_N_JOBS install
 sources:
   - type: archive
-    url: https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.bz2
-    sha256: 6478edfe2f3305127cffe8caf73ea0176c53769f4bf1585be237eb30798c3b8e
+    url: https://boostorg.jfrog.io/artifactory/main/release/1.86.0/source/boost_1_86_0.tar.bz2
+    sha256: 1bed88e40401b2cb7a1f76d4bab499e352fa4d0c5f31c0dbae64e24d34d7513b
     x-checker-data:
       type: anitya
       project-id: 6845
