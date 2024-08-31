@@ -82,7 +82,7 @@ modules:
         tag: 0.1.21.630a1
         x-checker-data:
           type: git
-          tag-pattern: ^([\\d.]+)$
+          tag-pattern: '^([\d.]+)$'
     buildsystem: simple
     build-commands:
       - cp -r ./* /app/
