@@ -62,11 +62,14 @@ jobs:
     steps:
     - name: Download artifacts
       uses: actions/download-artifact@v4
+      with:
+        merge-multiple: true
+        path: bundles
 
     - name: Get current date
       id: date
       run: |
-        ls -la
+        ls -la bundles/
         echo "DATESTAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
     - name: Create release
@@ -77,5 +80,5 @@ jobs:
         generate_release_notes: true
         append_body: true
         files: |
-          ${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_x86_64.flatpak
-          ${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_arm64.flatpak
+          bundles/${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_x86_64.flatpak
+          bundles/${{ github.head_ref || github.ref_name }}_${{ env.DATESTAMP }}_arm64.flatpak
