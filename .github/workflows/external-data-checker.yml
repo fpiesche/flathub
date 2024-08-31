@@ -10,12 +10,12 @@ jobs:
     strategy:
       matrix:
         branch:
-          - org.arx-libertatis.arx-libertatis
+          - org.arx_libertatis.arxlibertatis
           - io.github.fpiesche.f2bgl
-          - io.github.elasota.Aerofoil
-          - io.github.Interkarma.daggerfall-unity
-          - io.github.andrei-drexler.ironwail
-          - io.gitlab.re-volt.rvgl
+          - io.github.elasota.aerofoil
+          - io.github.interkarma.daggerfall-unity
+          - io.github.andrei_drexler.ironwail
+          - io.gitlab.re_volt.rvgl.re-volt
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
