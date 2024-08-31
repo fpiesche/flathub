@@ -14,4 +14,4 @@ sources:
       type: json
       url: https://api.github.com/repos/g-truc/glm/releases/latest
       version-query: .tag_name
-      url-query: ''.assets[] | select(.name | test("glm-" + $version + ".*.zip")) | .browser_download_url'
+      url-query: '.assets[] | select(.name | test("glm-" + $version + ".*.zip")) | .browser_download_url'
