@@ -2,7 +2,7 @@ app-id: io.github.elasota.aerofoil
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
-command: aerofoil
+command: AerofoilX
 
 finish-args:
   # hardware 3D
@@ -12,8 +12,6 @@ finish-args:
   - --socket=x11
   # Audio
   - --socket=pulseaudio
-  # Configuration path
-  - --persist=.config
 
 cleanup:
   - /include
@@ -27,32 +25,14 @@ modules:
 
   - name: aerofoil
     buildsystem: cmake-ninja
+    builddir: true
     build-options:
-      - -DCMAKE_CXX_FLAGS=-isystem\ ./AerofoilMac
       - -DCMAKE_INSTALL_PREFIX=/app
     sources:
       - type: git
         url: https://github.com/elasota/Aerofoil.git
         # tag: "1.1.2"
-        commit: 4340e8fc5c62fc8ac487a75fbf40ef9943d95749
-        disable-submodules: true
+        commit: e3b481093a12c65cb94be9cc8b602898dd68b10b
         x-checker-data:
           type: git
           tag-pattern: '^([\d\.]+)$'
-      - type: patch
-        path: fix-sdl-build.patch
-      - type: archive
-        url: https://github.com/elasota/Aerofoil/releases/download/1.1.2/Aerofoil-1.1.2-win64.zip
-        sha256: a407f6e70e79941198ce36ae4fda8d000c7f10c8a0b52b1fd740e70b2c4c0a99
-        strip-components: 1
-        dest: ./windows-data
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/elasota/Aerofoil/releases
-          version-query: 'first(.[] | select(.tag_name | test("^([\d\.]+)$"))).tag_name'
-          url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name== "Aerofoil-" + $version + "-win64.zip").browser_download_url
-    post-install:
-      # Install data files
-      - mkdir -p /app/lib/aerofoil
-      - cp -R ./Resources /app/lib/aerofoil/
-      - cp -R ./windows-data/Packaged /app/lib/aerofoil/
