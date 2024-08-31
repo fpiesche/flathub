@@ -13,11 +13,11 @@ jobs:
       matrix:
         arch:
           - x86_64
-          - aarch64
+          # - aarch64
       fail-fast: false
     runs-on: ubuntu-latest
     container:
-      image: freedesktopsdk/flatpak:23.08
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
     steps:
     - uses: actions/checkout@v4
       with:
