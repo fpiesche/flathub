@@ -34,11 +34,12 @@ modules:
       - type: git
         url: https://github.com/elasota/Aerofoil.git
         # tag: "1.1.2"
-        commit: 4340e8fc5c62fc8ac487a75fbf40ef9943d95749
+        commit: 1fe94e4f06cec8f68b9298a82c15dab6113d1c61
         disable-submodules: true
         x-checker-data:
           type: git
           tag-pattern: ^([\d\.]+)$
+        tag: 1.1.2
       - type: patch
         path: fix-sdl-build.patch
       - type: archive
