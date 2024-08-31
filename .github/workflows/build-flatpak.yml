@@ -25,7 +25,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y flatpak-builder
-        sudo flatpak remote-add flathub --system https://flathub.org/repo/flathub.flatpakrepo
+        flatpak remote-add --user flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Set up QEMU
       if: ${{ matrix.arch != 'x86_64' }}
