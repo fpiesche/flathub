@@ -14,11 +14,16 @@ jobs:
         arch:
           - x86_64
           - aarch64
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: 'true'
+
+    - name: Install deps
+      run: |
+        apt install -y flatpak-builder
 
     - name: Set up QEMU
       if: ${{ matrix.arch != 'x86_64' }}
