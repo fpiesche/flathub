@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <id>io.github.elasota.Aerofoil</id>
+  <id>io.github.elasota.aerofoil</id>
   <name>Aerofoil</name>
   <developer id="io.github.elasota.Aerofoil">
     <name>Aerofoil Contributors</name>

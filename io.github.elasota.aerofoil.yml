@@ -1,4 +1,4 @@
-app-id: io.github.elasota.Aerofoil
+app-id: io.github.elasota.aerofoil
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
