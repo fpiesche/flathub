@@ -38,7 +38,7 @@ modules:
         disable-submodules: true
         x-checker-data:
           type: git
-          tag-pattern: ^([\d\.]+)$
+          tag-pattern: '^([\d\.]+)$'
       - type: patch
         path: fix-sdl-build.patch
       - type: archive
