@@ -2,7 +2,9 @@ name: Build Flatpak
 
 on:
   push:
-    branches: ["*"]
+    branches:
+      - "*"
+      - "!master"
   workflow_dispatch:
 
 jobs:
@@ -30,3 +32,9 @@ jobs:
         name: ${{ github.head_ref || github.ref_name }}.flatpak
         path: ${{ github.head_ref || github.ref_name }}.flatpak
         retention-days: 0
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: ${{ github.head_ref || github.ref_name }}
+        make_latest: true
