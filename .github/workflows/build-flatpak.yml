@@ -38,10 +38,3 @@ jobs:
         cache-key: flatpak-builder-${{ github.sha }}_${{ matrix.arch }}
         upload-artifact: true
         arch: ${{ matrix.arch }}
-
-    # - name: Upload artifact
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: ${{ github.head_ref || github.ref_name }}_${{ matrix.arch }}.flatpak
-    #     path: ${{ github.head_ref || github.ref_name }}_${{ matrix.arch }}.flatpak
-    #     retention-days: 0
