@@ -24,8 +24,8 @@ jobs:
     - name: Install deps
       run: |
         sudo apt update
-        sudo apt install -y flatpak-builder
-        flatpak remote-add --user flathub https://flathub.org/repo/flathub.flatpakrepo
+        sudo apt install -y flatpak flatpak-builder
+        flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Set up QEMU
       if: ${{ matrix.arch != 'x86_64' }}
