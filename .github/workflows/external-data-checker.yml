@@ -16,7 +16,7 @@ jobs:
           - io.github.elasota.aerofoil
           - io.github.interkarma.daggerfall-unity
           - io.github.andrei_drexler.ironwail
-          - io.gitlab.re_volt.rvgl.re-volt
+          - io.gitlab.re_volt.rvgl-launcher
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
