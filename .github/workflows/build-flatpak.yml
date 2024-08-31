@@ -23,7 +23,8 @@ jobs:
 
     - name: Install deps
       run: |
-        apt install -y flatpak-builder
+        sudo apt update
+        sudo apt install -y flatpak-builder
 
     - name: Set up QEMU
       if: ${{ matrix.arch != 'x86_64' }}
