@@ -11,7 +11,7 @@ sources:
     url: https://github.com/g-truc/glm/releases/download/0.9.9.8/glm-0.9.9.8.zip
     sha256: 37e2a3d62ea3322e43593c34bae29f57e3e251ea89f4067506c94043769ade4c
     x-checker-data:
-      type: anitya
-      project-id: 1181
-      stable-only: true
-      url-template: https://github.com/g-truc/glm/releases/download/$version/glm-$version.zip
+      type: json
+      url: https://api.github.com/repos/g-truc/glm/releases/latest
+      version-query: .tag_name
+      url-query: .assets[] | select(.name==\"jq-\" + $version + \".tar.gz\") | .browser_download_url
