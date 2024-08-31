@@ -60,7 +60,7 @@ modules:
           tag-pattern: ^([\d\.]+)$
     post-install:
       # Install metadata and launcher files
-      - desktop-file-edit --set-icon=org.arx_libertatis.ArxLibertatis data/icons/arx-libertatis.desktop
-      - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/org.arx_libertatis.arxlibertatis.desktop
-      - install -D -m644 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/org.arx_libertatis.arxlibertatis.png
+      - desktop-file-edit --set-icon=${FLATPAK_ID} data/icons/arx-libertatis.desktop
+      - install -D -m755 data/icons/arx-libertatis.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -D -m644 ./ArxLibertatisData/icons/arx-libertatis-256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       # - install -D -m644 ./
