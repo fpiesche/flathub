@@ -16,16 +16,12 @@ jobs:
           - aarch64
       fail-fast: false
     runs-on: ubuntu-latest
+    container:
+      image: freedesktopsdk/flatpak:23.08
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: 'true'
-
-    - name: Install deps
-      run: |
-        sudo apt update
-        sudo apt install -y flatpak flatpak-builder
-        flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Set up QEMU
       if: ${{ matrix.arch != 'x86_64' }}
