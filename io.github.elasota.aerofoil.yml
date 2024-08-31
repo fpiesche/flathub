@@ -49,9 +49,8 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/elasota/Aerofoil/releases
-          version-query: first(.[] | select(.tag_name | test("^([\d\.]+)$"))).tag_name
-          url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name
-            == "Aerofoil-" + $version + "-win64.zip").browser_download_url
+          version-query: 'first(.[] | select(.tag_name | test("^([\d\.]+)$"))).tag_name'
+          url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name== "Aerofoil-" + $version + "-win64.zip").browser_download_url
     post-install:
       # Install data files
       - mkdir -p /app/lib/aerofoil
