@@ -1,13 +1,13 @@
 app-id: io.gitlab.re_volt.rvgl-launcher
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: rvgl-launcher.sh
 
 add-extensions:
   org.freedesktop.Platform.GL:
     directory: lib/GL
-    version: '22.08'
+    version: '23.08'
 
 modules:
   - shared-modules/glu/glu-9.json
