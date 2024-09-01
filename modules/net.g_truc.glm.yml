@@ -1,18 +1,13 @@
 name: glm
-buildsystem: cmake-ninja
-cleanup: ['*']
-no-make-install: true
-post-install:
-  - install -d ${FLATPAK_DEST}/include
-  - cp -R glm ${FLATPAK_DEST}/include
-  - cp -R cmake/glm ${FLATPAK_DEST}/lib/cmake
+buildsystem: simple
+build-commands:
+  - cp -r glm /app/include
 sources:
   - type: archive
-    url: https://github.com/g-truc/glm/releases/download/1.0.1/glm-1.0.1-light.zip
-    sha256: 9a995de4da09723bd33ef194e6b79818950e5a8f2e154792f02e4615277cfb8d
+    url: https://github.com/g-truc/glm/archive/refs/tags/1.0.1.zip
+    sha256: 09c5716296787e1f7fcb87b1cbdbf26814ec1288ed6259ccd30d5d9795809fa5
     x-checker-data:
       type: json
       url: https://api.github.com/repos/g-truc/glm/releases/latest
       version-query: .tag_name
-      url-query: .assets[] | select(.name | test("glm-" + $version + ".*.zip")) |
-        .browser_download_url
+      url-template: https://github.com/g-truc/glm/archive/refs/tags/$version.zip
