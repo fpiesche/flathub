@@ -9,6 +9,18 @@ add-extensions:
     directory: lib/GL
     version: '23.08'
 
+finish-args:
+  # hardware 3D + gamepads
+  - --device=all
+  - --device=dri
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Audio
+  - --socket=pulseaudio
+  # Online game
+  - --share=network
+
 modules:
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
@@ -101,18 +113,3 @@ modules:
       - install -D rvgl-launcher.sh /app/bin/rvgl-launcher.sh
       - install -D ${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
       - install -D ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
-
-finish-args:
-  # hardware 3D
-  - --device=all
-  - --device=dri
-  # X11 + XShm access
-  - --share=ipc
-  - --socket=x11
-  - --socket=fallback-x11
-  # Audio
-  - --socket=pulseaudio
-  # Wayland access
-  - --socket=wayland
-  # Needs to talk to the network:
-  - --share=network
