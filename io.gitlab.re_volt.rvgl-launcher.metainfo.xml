@@ -44,6 +44,9 @@
     <category>Game</category>
   </categories>
   <releases>
+    <release version="0.1.23.1030a3" date="2024-09-02">
+      <description></description>
+    </release>
     <release version="0.1.21.630a1" date="2021-06-30"/>
   </releases>
   <content_rating type="oars-1.1">
@@ -75,5 +78,5 @@
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <update_contact></update_contact>
+  <update_contact/>
 </application>

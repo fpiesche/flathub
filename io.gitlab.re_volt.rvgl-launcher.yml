@@ -34,8 +34,8 @@ modules:
       - --disable-glcanvasegl
     sources:
       - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.2.1/wxWidgets-3.2.2.1.tar.bz2
-        sha256: dffcb6be71296fff4b7f8840eb1b510178f57aa2eb236b20da41182009242c02
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.5/wxWidgets-3.2.5.tar.bz2
+        sha256: 0ad86a3ad3e2e519b6a705248fc9226e3a09bbf069c6c692a02acf7c2d1c6b51
         x-checker-data:
           type: html
           url: https://wxwidgets.org/downloads
@@ -91,10 +91,11 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/re-volt/rvgl-launcher.git
-        tag: 0.1.21.630a1
+        tag: 0.1.23.1030a3
         x-checker-data:
           type: git
-          tag-pattern: '^([(\d+\.)+].+)$'
+          tag-pattern: ^([(\d+\.)+].+)$
+        commit: 79da43a1bf72273af9042cabf2a6c9b03c3967a7
     buildsystem: simple
     build-commands:
       - cp -r ./* /app/bin/
