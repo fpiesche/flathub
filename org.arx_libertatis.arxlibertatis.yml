@@ -35,7 +35,7 @@ modules:
       - modules/io.github.anholt.libepoxy.yml
       - modules/net.g_truc.glm.yml
       - modules/org.openal_soft.openal-soft.yml
-    buildsystem: cmake
+    buildsystem: cmake-ninja
     build-options:
       cxxflags: -O2 -g -pthread -lGL
       env:
