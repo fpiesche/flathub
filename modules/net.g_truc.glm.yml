@@ -10,4 +10,4 @@ sources:
       type: json
       url: https://api.github.com/repos/g-truc/glm/releases/latest
       version-query: .tag_name
-      url-template: https://github.com/g-truc/glm/archive/refs/tags/$version.zip
+      url-query: '.assets[] | select(.name | test("glm-" + $version + ".*.zip")) | .browser_download_url'
