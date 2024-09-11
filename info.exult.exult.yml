@@ -53,10 +53,10 @@ modules:
     sources:
       - type: git
         url: https://github.com/exult/exult.git
-        tag: v1.8.x
+        tag: v1.10
         x-checker-data:
           type: git
-          tag-pattern: ^v([\\d.]+)$
+          tag-pattern: ^v([\d.]+)$
     buildsystem: autotools
     config-opts:
       - --enable-mt32emu
