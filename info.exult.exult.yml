@@ -79,8 +79,8 @@ modules:
           --enable-nonreadied-objects
           --disable-oggtest
           --disable-vorbistest
-        - make -j$FLATPAK_BUILDER_N_JOBS
-        - make install
+      - make -j$FLATPAK_BUILDER_N_JOBS
+      - make install
 
   - name: extra-data
     sources:
