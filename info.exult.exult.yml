@@ -57,9 +57,24 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
-    buildsystem: autotools
+    buildsystem: simple
     config-opts:
+      - --with-debug=extreme
       - --enable-mt32emu
+      - --enable-exult-studio
+      - --enable-exult-studio-support
+      - --enable-compiler
+      - --enable-gimp-plugin
+      - --enable-zip-support
+      - --enable-shared
+      - --enable-midi-sfx
+      - --enable-data
+      - --enable-mods
+      - --with-usecode-debugger=yes
+      - --enable-usecode-container
+      - --enable-nonreadied-objects
+      - --disable-oggtest
+      - --disable-vorbistest
 
   - name: extra-data
     sources:
@@ -87,6 +102,8 @@ modules:
           - install -m644 crude.cfg /app/share/freepats/freepats.cfg
       - type: file
         path: info.exult.exult.metainfo.xml
+      - type: file
+        path: info.exult.exult.releases.xml
       - type: file
         path: timidity.cfg
       - type: file
