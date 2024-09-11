@@ -75,16 +75,20 @@ modules:
 
   - name: extra-data
     sources:
-      - type: extra-data
+      - type: archive
+      # extra-data doesn't work with exported bundles https://github.com/flatpak/flatpak/issues/1334
+      # - type: extra-data
+      #   filename: exult_audio.zip
         url: https://downloads.sourceforge.net/project/exult/exult-data/exult_audio.zip
         sha256: 72e10efa8664a645470ceb99f6b749ce99c3d5fd1c8387c63640499cfcdbbc68
-        filename: exult_audio.zip
         size: 48439905
-      - type: extra-data
+      - type: archive
+      # extra-data doesn't work with exported bundles https://github.com/flatpak/flatpak/issues/1334
+      # - type: extra-data
+      #   filename: freepats.tar.xz
         url: https://freepats.zenvoid.org/freepats-20060219.tar.xz
         sha256: 500c61782ff4b22de6887c0a32e68dd98b511c4396ddf89e8cab482c7dcea89e
         size: 25093512
-        filename: freepats.tar.xz
       - type: script
         dest-filename: apply_extra
         commands:
@@ -107,7 +111,14 @@ modules:
         path: info.exult.exult.png
     buildsystem: simple
     build-commands:
-      - install -Dm755 apply_extra /app/bin/apply_extra
+      # Temporary solution for the lack of extra-data support in exported bundles
+      - install -Dm644 exult_audio/*.ogg /app/share/exult/music/
+      - install -Dm644 exult_audio/*.flx /app/share/exult/
+      - install -Dm644 freepats/Drum_000/*.{pat,txt} /app/share/freepats/Drum_000
+      - install -Dm644 freepats/Tone_000/*.{pat,txt} /app/share/freepats/Tone_000
+      - install -m644 crude.cfg /app/share/freepats/freepats.cfg
+      # End of temporary fix for exported bundle
+      # - install -Dm755 apply_extra /app/bin/apply_extra
       - install -d /app/share/timidity
       - install -m644 timidity.cfg /app/share/timidity/timidity.cfg
       - install -Dm 644 ${FLATPAK_ID}.releases.xml /app/share/metainfo/releases/${FLATPAK_ID}.releases.xml
