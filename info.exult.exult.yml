@@ -58,23 +58,29 @@ modules:
           type: git
           tag-pattern: ^v([\d.]+)$
     buildsystem: simple
-    config-opts:
-      - --with-debug=extreme
-      - --enable-mt32emu
-      - --enable-exult-studio
-      - --enable-exult-studio-support
-      - --enable-compiler
-      - --enable-gimp-plugin
-      - --enable-zip-support
-      - --enable-shared
-      - --enable-midi-sfx
-      - --enable-data
-      - --enable-mods
-      - --with-usecode-debugger=yes
-      - --enable-usecode-container
-      - --enable-nonreadied-objects
-      - --disable-oggtest
-      - --disable-vorbistest
+    build-commands:
+      - autoreconf -v -i
+      - >
+        ./configure
+          --prefix=/app
+          --with-debug=extreme
+          --enable-mt32emu
+          --enable-exult-studio
+          --enable-exult-studio-support
+          --enable-compiler
+          --enable-gimp-plugin
+          --enable-zip-support
+          --enable-shared
+          --enable-midi-sfx
+          --enable-data
+          --enable-mods
+          --with-usecode-debugger=yes
+          --enable-usecode-container
+          --enable-nonreadied-objects
+          --disable-oggtest
+          --disable-vorbistest
+        - make -j$FLATPAK_BUILDER_N_JOBS
+        - make install
 
   - name: extra-data
     sources:
