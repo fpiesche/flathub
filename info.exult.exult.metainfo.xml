@@ -38,9 +38,7 @@
   <categories>
     <category>Game</category>
   </categories>
-  <releases>
-    <release version="1.8" date="2022-04-16"/>
-  </releases>
+  <releases type="external" url="https://raw.githubusercontent.com/fpiesche/flathub/info.exult.exult/info.exult.exult.releases.xml" />
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">intense</content_attribute>
     <content_attribute id="violence-bloodshed">intense</content_attribute>
