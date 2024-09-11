@@ -61,12 +61,11 @@ modules:
     build-commands:
       - autoreconf -v -i
       - ./configure --prefix=/app --with-debug=extreme \
-          --enable-mt32emu --enable-midi-sfx \
+          --disable-oggtest --enable-midi-sfx \
           --enable-exult-studio --enable-exult-studio-support \
           --enable-compiler --with-usecode-debugger=yes --enable-usecode-container \
           --enable-zip-support --enable-data --enable-mods \
-          --enable-shared --enable-nonreadied-objects \
-          --disable-oggtest --disable-vorbistest
+          --enable-shared --enable-nonreadied-objects
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
 
