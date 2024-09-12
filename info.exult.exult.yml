@@ -62,14 +62,14 @@ modules:
       - pwd
       - autoreconf -v -i
       - pwd
-      - ./configure --with-debug=extreme \
-          --enable-exult-studio --enable-exult-studio-support \
-          --enable-compiler \
-          --enable-zip-support --enable-shared --enable-midi-sfx \
-          --enable-data --enable-mods \
-          --enable-usecode-container --enable-nonreadied-objects \
-          --disable-oggtest --disable-vorbistest \
-          CXX=g++ CC=gcc
+      - >
+          ./configure --with-debug=extreme
+          --enable-exult-studio --enable-exult-studio-support
+          --enable-compiler
+          --enable-zip-support --enable-shared --enable-midi-sfx
+          --enable-data --enable-mods
+          --enable-usecode-container --enable-nonreadied-objects
+          --disable-oggtest --disable-vorbistest
       - make -j$FLATPAK_BUILDER_N_JOBS
       - make install
 
