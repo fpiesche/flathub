@@ -1,0 +1,104 @@
+app-id: com.slipseer.qbj3
+runtime: org.freedesktop.Platform
+runtime-version: "25.08"
+sdk: org.freedesktop.Sdk
+command: com.slipseer.qbj3.sh
+
+finish-args:
+  # Wayland and X11 fallback
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  # Audio and hardware 3D
+  - --device=dri
+  - --socket=pulseaudio
+  # Input devices
+  - --device=all # Change to device=input once resolved. See https://discourse.flathub.org/t/support-for-device-input/6645  and https://github.com/flatpak/flatpak/issues/5681
+  # Network
+  - --share=network
+  # Set SDL environment variables to try and fix window icon
+  - --env=SDL_VIDEO_WAYLAND_WMCLASS=com.slipseer.qbj3
+  - --env=SDL_VIDEO_X11_WMCLASS=com.slipseer.qbj3
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/games/qbj3/src
+  - /share/games/qbj3/mapsrc
+  - /share/games/qbj3/Art Vault.7z
+  - /share/games/qbj3/auto.sav
+  - /share/games/qbj3/docs
+
+modules:
+  - name: ironwail
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/andrei-drexler/ironwail/zipball/v0.8.1
+        sha256: aa2a02b43c2f9415023a37469ae01d2194d62a3ccdf2b61a8013b82de96aeec1
+        dest-filename: ironwail.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/andrei-drexler/ironwail/releases/latest
+          version-query: .tag_name
+          url-query: .zipball_url
+      - type: patch
+        path: io.github.sezero.quakespasm.userdir_log.patch
+      - type: patch
+        path: io.github.andrei_drexler.ironwail.autosave-userdir.patch
+    no-autogen: true
+    no-make-install: true
+    subdir: Quake
+    make-args:
+      - DO_USERDIRS=1
+      - USE_SDL2=1
+      - DEBUG=1
+      - LDFLAGS="-L/app/lib"
+    post-install:
+      - install -D -m755 -t /app/bin/ ironwail
+
+  - name: librequake-data
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/lavenderdotpet/LibreQuake/releases/download/v0.09-beta/full.zip
+        sha256: 623e463b35811216244f9ba15e0c45abc1765288650b5e3d36a899b35e4bcf3d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/lavenderdotpet/LibreQuake/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name=="full.zip") | .browser_download_url
+    build-commands:
+      - mkdir -p /app/share/games/qbj3/id1
+      - mv -v ./id1 /app/share/games/qbj3
+
+  - name: qbj3-data
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://us.22061996.xyz/qbj3/qbj3.zip
+        sha256: 0b3a4f541e57b887b42a3dd1709ae32d8016994ddf4d12bc5a85d6c9c2f45835
+        dest: qbj3
+        dest-filename: qbj3.zip
+        x-checker-data:
+          type: json
+          url: https://www.slipseer.com/index.php?resources/quake-brutalist-jam-iii.549/history
+          version-pattern: "The latest version is ([\\d\\.-]+)"
+          url-pattern: https://us.22061996.xyz/qbj3/qbj3.zip
+      - type: file
+        path: com.slipseer.qbj3.sh
+      - type: file
+        path: com.slipseer.qbj3.png
+      # - type: file
+      #   path: com.slipseer.qbj3.svg
+      - type: file
+        path: com.slipseer.qbj3.desktop
+      - type: file
+        path: com.slipseer.qbj3.metainfo.xml
+    build-commands:
+      - mv qbj3 -t /app/share/games/qbj3/
+      - install -D -m755 ${FLATPAK_ID}.sh -t /app/bin/
+      - install -D -m644 ${FLATPAK_ID}.desktop -t /app/share/applications/
+      # - install -D -m644 ${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps/
+      - install -D -m644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/512x512/apps/
+      - install -D -m644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/

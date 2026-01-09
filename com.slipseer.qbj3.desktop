@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game
+Comment=Brutalist retro shooter
+Exec=com.slipseer.qbj3.sh
+Icon=com.slipseer.qbj3
+Keywords=quake;brutalism;jam
+Name=Quake Brutalist Jam III
+StartupNotify=true
+Terminal=false
+Type=Application

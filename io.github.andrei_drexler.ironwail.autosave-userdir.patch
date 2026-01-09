@@ -1,0 +1,106 @@
+diff --git a/Quake/host_cmd.c b/Quake/host_cmd.c
+index 3d4615db..ea7e505a 100644
+--- a/Quake/host_cmd.c
++++ b/Quake/host_cmd.c
+@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+ #include "quakedef.h"
+ #include "q_ctype.h"
++#include "sys.h"
+ #include "json.h"
+ #include <time.h>
+ #ifndef WITHOUT_CURL
+@@ -1396,8 +1397,9 @@ void SaveList_Init (void)
+ 	char		dirname[MAX_OSPATH];
+ 	char		savename[MAX_QPATH];
+ 	findfile_t *find;
++	Sys_GetUserdir(dirname, MAX_OSPATH);
+ 
+-	for (find = Sys_FindFirst (com_gamedir, "sav"); find; find = Sys_FindNext (find))
++	for (find = Sys_FindFirst (dirname, "sav"); find; find = Sys_FindNext (find))
+ 	{
+ 		if (find->attribs & FA_DIRECTORY)
+ 			continue;
+@@ -1405,7 +1407,7 @@ void SaveList_Init (void)
+ 		FileList_Add (savename, &savelist);
+ 	}
+ 
+-	if ((size_t) q_snprintf (dirname, sizeof (dirname), "%s/autosave", com_gamedir) < sizeof (dirname))
++	if ((size_t) q_snprintf (dirname, sizeof (dirname), "%s/autosave/%s", dirname, com_gamedir) < sizeof (dirname))
+ 	{
+ 		for (find = Sys_FindFirst (dirname, "sav"); find; find = Sys_FindNext (find))
+ 		{
+@@ -1413,7 +1415,7 @@ void SaveList_Init (void)
+ 			if (find->attribs & FA_DIRECTORY)
+ 				continue;
+ 			COM_StripExtension (find->name, filename, sizeof (filename));
+-			if ((size_t) q_snprintf (savename, sizeof (savename), "autosave/%s", filename) < sizeof (savename))
++			if ((size_t) q_snprintf (savename, sizeof (savename), "%s/autosave/%s/%s", dirname, com_gamedir, filename) < sizeof (savename))
+ 				FileList_Add (savename, &savelist);
+ 		}
+ 	}
+diff --git a/Quake/menu.c b/Quake/menu.c
+index dd284089..569cf9b1 100644
+--- a/Quake/menu.c
++++ b/Quake/menu.c
+@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ #include "quakedef.h"
+ #include "bgmusic.h"
+ #include "q_ctype.h"
++#include "sys.h"
+ 
+ #include <time.h>
+ 
+@@ -2063,10 +2064,12 @@ void M_SetSkillMenuMap (const char *name)
+ void M_Menu_Skill_f (void)
+ {
+ 	char autosave[MAX_OSPATH];
++	char dirname[MAX_OSPATH];
++	Sys_GetUserdir(dirname, MAX_OSPATH);
+ 
+ 	m_skill_canresume = false;
+ 	m_skill_lastplayed = 0;
+-	q_snprintf (autosave, sizeof (autosave), "%s/autosave/%s.sav", com_gamedir, m_skill_mapname);
++	q_snprintf (autosave, sizeof (autosave), "%s/autosave/%s/%s.sav", dirname, com_gamedir, m_skill_mapname);
+ 	if (Sys_FileExists (autosave))
+ 	{
+ 		time_t now, lastplayed;
+diff --git a/Quake/quakedef.h b/Quake/quakedef.h
+index 5c519aa7..2e095c25 100644
+--- a/Quake/quakedef.h
++++ b/Quake/quakedef.h
+@@ -64,7 +64,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ #define ENGINE_PAK				"ironwail.pak"
+ #define ENGINE_USERDIR_WIN		"Ironwail"
+ #define ENGINE_USERDIR_OSX		"Ironwail"
+-#define ENGINE_USERDIR_UNIX		".ironwail"
++#define ENGINE_USERDIR_UNIX		""
+ 
+ //define	PARANOID			// speed sapping error checking
+ 
+diff --git a/Quake/sys.h b/Quake/sys.h
+index 57c9791a..71c50823 100644
+--- a/Quake/sys.h
++++ b/Quake/sys.h
+@@ -63,6 +63,9 @@ const char *Sys_GetEGSLauncherData (void);
+ // (to avoid writing in Nightdive Studios/Quake)
+ qboolean Sys_GetAltUserPrefDir (qboolean remastered, char *path, size_t pathsize);
+ 
++// User data directory
++void Sys_GetUserdir (char *dst, size_t dstsize);
++
+ // shows path in file browser
+ qboolean Sys_Explore (const char *path);
+ 
+diff --git a/Quake/sys_sdl_unix.c b/Quake/sys_sdl_unix.c
+index 15fed2f9..842fd1c0 100644
+--- a/Quake/sys_sdl_unix.c
++++ b/Quake/sys_sdl_unix.c
+@@ -444,6 +444,6 @@ static void Sys_GetUserdir (char *dst, size_t dstsize)
+ 	q_snprintf (dst, dstsize, "%s/%s", buffer, SYS_USERDIR);
+ }
+ #else
+-static void Sys_GetUserdir (char *dst, size_t dstsize)
++void Sys_GetUserdir (char *dst, size_t dstsize)
+ {
+ 	size_t		n;

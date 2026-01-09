@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.slipseer.qbj3</id>
+  <name>Quake Brutalist Jam III</name>
+  <developer id="com.slipseer.qbj3">
+    <name>QBJ3 Contributors</name>
+    <url>https://www.slipseer.com/index.php?resources/quake-brutalist-jam-iii.549/</url>
+  </developer>
+  <branding>
+    <color type="primary" scheme_preference="light">#ffffff</color>
+    <color type="primary" scheme_preference="dark">#1c1a1a</color>
+  </branding>
+  <summary>Brutalism-themed retro shooter</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-Proprietary</project_license>
+  <launchable type="desktop-id">com.slipseer.qbj3.desktop</launchable>
+  <url type="homepage">https://qbj3.slipseer.com/</url>
+  <url type="vcs-browser">https://github.com/andrei-drexler/ironwail</url>
+  <description>
+    <p>Quake Brutalist Jam III is a megalithic community project more than a year in the making. It features an entirely new arsenal, a set of new monsters, new powerups, and a complete visual overhaul of Quake's existing roster. The community came out in force, producing an unprecedented 77 maps, pushing the limits of the Quake engine to bring the oppressive, gritty, and beautiful aesthetic of brutalism to life.</p>
+    <p>The goal for QBJ3 was to make something uniquely ambitious for the community to build with us. Beginning production in the winter of 2024, the team slow-cooked a total conversion mod in (semi) secret. In October 2025 the work-in-progress mod was unleashed upon the community, who spent the next six weeks exploring its tools, testing its limits, and ultimately creating the worlds for the mod to take place in.</p>
+    <p>Thank you to everyone who made this project possible, either through direct contribution, cheering from the sidelines, badgering us about a release date, or dutifully paying attention to the project. Please enjoy the worlds we've all spent so long crafting.</p>
+    <p>This Flatpak distribution includes the Quake source port Ironwail and the free LibreQuake assets for an all-in-one package.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_hcm-jpg.7076/</image>
+      <caption>"Escape From KOE-37" by Mazu</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_id0-jpg.7077/</image>
+      <caption>"Sector 7" by id0</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_janvanderweg-jpg.7078/</image>
+      <caption>"Guess where I ran out of time. Everywhere!" by Jan</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_pulsar-jpg.7079/</image>
+      <caption>"The Monochrome" by PuLSaR</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_sze-jpg.7080/</image>
+      <caption>"The Oppressing Facade" by sze</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_zbidou-jpg.7081/</image>
+      <caption>"Das Brut" by zbidou72</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://www.slipseer.com/index.php?attachments/qbj3_zetabyt-jpg.7082/</image>
+      <caption>"Color Decay" by ZetaByt</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
+  <provides>
+    <binary>ironwail</binary>
+  </provides>
+  <keywords>
+    <keyword>brutalism</keyword>
+    <keyword>quake</keyword>
+    <keyword>fps</keyword>
+    <keyword>shooter</keyword>
+  </keywords>
+  <releases>
+    <release version="1.0" date="2026-01-04" />
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">mild</content_attribute>
+    <content_attribute id="social-chat">intense</content_attribute>
+  </content_rating>
+</component>
